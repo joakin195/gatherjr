@@ -1,0 +1,4 @@
+    MEGAPROCESO --> PROCESO
+        PROCESO --> ETAPA
+            TAREA --> TAREA
+                ACTIVIDAD --> ACTIVIDAD

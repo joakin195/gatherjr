@@ -1,0 +1,21 @@
+SELECT t.*
+FROM wf_obj.TAREAS t
+WHERE t.PROCESO = 1
+ORDER BY t.CLAVE
+WITH UR;
+
+
+SELECT
+  p.descripcion Proceso,
+  t.CLAVE       clave_tarea,
+  t.descripcion tarea,
+  c.DESCRIPCION check
+FROM WF_OBJ.PROCESOS p
+  LEFT JOIN WF_OBJ.tareas t ON t.PROCESO = p.CLAVE
+  LEFT JOIN WF_OBJ.TAREAS_CHECKS tc ON t.CLAVE = tc.TAREA
+  LEFT JOIN WF_OBJ.CHECKS c ON c.CLAVE = tc.CHECK
+ORDER BY p.CLAVE, t.CLAVE, c.CLAVE
+WITH UR
+
+
+
