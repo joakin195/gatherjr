@@ -310,6 +310,11 @@
         <version>${appengine-maven-plugin-version}</version>
       </plugin>
       <plugin>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-maven-plugin</artifactId>
+            <version>1.9.9</version>
+        </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>2.3</version>
@@ -326,6 +331,7 @@
         </configuration>
       </plugin>
                 </plugins>
+
             </build>
         </profile> 
                     
