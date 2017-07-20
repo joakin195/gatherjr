@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>APIS_GOOGLE</name>
+    <name>APIS_GOOGLE_GIT</name>
 
     <repositories>
         <repository>
@@ -139,24 +139,13 @@
             <groupId>com.gather</groupId>
             <artifactId>mail-commons</artifactId>
             <version>1.5.4</version>
-        </dependency> 
+        </dependency>
         <dependency>
-      <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-testing</artifactId>
-      <version>${appengine.target.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-api-stubs</artifactId>
-      <version>${appengine.target.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-api-1.0-sdk</artifactId>
-      <version>${appengine.target.version}</version>
-    </dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>1.9.54</version>
+        </dependency> 
+        
     </dependencies>
 
     <build>
@@ -176,6 +165,11 @@
             <id>produccion</id>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>com.google.appengine</groupId>
+                        <artifactId>appengine-maven-plugin</artifactId>
+                        <version>1.9.9</version>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
@@ -222,6 +216,11 @@
                 <finalName>APIS_GOOGLE_DESARROLLO</finalName>
                 <plugins>
                     <plugin>
+                        <groupId>com.google.appengine</groupId>
+                        <artifactId>appengine-maven-plugin</artifactId>
+                        <version>1.9.9</version>
+                    </plugin>
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>${maven-compiler-plugin.version}</version>
@@ -235,6 +234,7 @@
                         </configuration>
                     </plugin>
                     <plugin>
+                        
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
                         <version>${maven-war-plugin.version}</version>
@@ -304,32 +304,11 @@
                             <failOnMissingWebXml>true</failOnMissingWebXml>
                         </configuration>
                     </plugin>
-                   <plugin>
-        <groupId>com.google.cloud.tools</groupId>
-        <artifactId>appengine-maven-plugin</artifactId>
-        <version>${appengine-maven-plugin-version}</version>
-      </plugin>
-      <plugin>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-maven-plugin</artifactId>
-            <version>1.9.9</version>
-        </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.3</version>
-        <configuration>
-          <archiveClasses>true</archiveClasses>
-          <webResources>
-            <!-- in order to interpolate version from pom into appengine-web.xml -->
-            <resource>
-              <directory>${basedir}/src/main/webapp/WEB-INF</directory>
-              <filtering>true</filtering>
-              <targetPath>WEB-INF</targetPath>
-            </resource>
-          </webResources>
-        </configuration>
-      </plugin>
+                    <plugin>
+                        <groupId>com.google.appengine</groupId>
+                        <artifactId>appengine-maven-plugin</artifactId>
+                        <version>1.9.9</version>
+                    </plugin>
                 </plugins>
 
             </build>
