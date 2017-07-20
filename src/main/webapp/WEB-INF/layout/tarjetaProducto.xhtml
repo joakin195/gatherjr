@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">    
+        <div class="ui-g-12 ui-md-6 ui-lg-6">
+            <div class="Container">
+                <div class="ContainerIndent">
+                    <div class="Card ShadowEffect SoftLightBlueBack">
+                        <h3 class="CardTopic">
+                            <ui:insert name="titulo">
+                                Template
+                            </ui:insert> 
+                            <ui:insert name="boton_detalle">
+                                
+                            </ui:insert>  
+                        </h3>
+
+                        <div class="Separator" />
+
+                        <div class="EmptyBox150">
+                            <ui:insert name="tarjeta_content">
+                                <c:set var="tarjetaProducto"
+                                       value="#{clienteFichaController.getTarjetaProductoData(producto.alias)}"/>
+
+                                <c:set var="tarjetaProductoMetadata"
+                                       value="#{clienteFichaController.getTarjetaProductoMetadata(producto.alias)}"/>
+
+                                <p:outputPanel rendered="#{tarjetaProductoMetadata.size() gt 1}" >
+                                    <ui:repeat value="#{tarjetaProducto.lista}"
+                                               var="item"
+                                               varStatus="status">
+                                        <p:outputPanel rendered="#{status.index ne 0}">
+                                            <h:outputText class="Blue"
+                                                          style="font-weight: bold;"
+                                                          value="#{tarjetaProductoMetadata.get(status.index).descripcion}" />
+                                            <h:outputText value=" #{item}">
+                                                <f:convertNumber type="number"
+                                                                 maxFractionDigits="#{tarjetaProductoMetadata.get(status.index).decimales}" />
+                                            </h:outputText>
+                                            <div class="Separator" />
+                                        </p:outputPanel>
+                                    </ui:repeat>
+                                </p:outputPanel>
+
+                                <p:outputPanel rendered="#{tarjetaProductoMetadata.size() le 1}" >
+                                    <div class="TexAlCenter">
+                                        <p>No hay datos para este producto</p>
+                                    </div>
+                                </p:outputPanel>
+                            </ui:insert>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</ui:composition>

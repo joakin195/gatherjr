@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <meta name="google-signin-client_id" content="12087956130-lmur6j9ie3gmnjtph5slmk6ou3iefi9p.apps.googleusercontent.com"/>
+            <script src="https://apis.google.com/js/platform.js"></script>
+            <link rel="icon" href="favicon.ico" />
+        </f:facet>
+        <title>BCI Google</title>
+
+        <h:outputScript name="js/ripple-effect.js" library="modena-layout" />
+        <h:outputScript name="js/perfect-scrollbar.js" library="modena-layout" />
+        <h:outputScript name="js/layout.js" library="modena-layout" />
+        <h:outputScript name="js/jquery-1.12.4.min.js" library="gather" />
+        <h:outputScript name="js/jquery-plugins/jquery.Rut.min.js" library="gather" />
+        <h:outputScript name="js/jquery.load.js" library="gather" />
+
+        <ui:insert name="head" />
+    </h:head>
+
+    <h:body class="ClienteCorredora Background" >
+
+        <c:if test="#{not empty gatherContext.userName }">
+            <f:event listener="#{gatherContext.checkSession()}" type="preRenderView" />  
+        </c:if>
+        <c:if test="#{gatherContext.userName eq null }">
+            <f:event listener="#{authGoogle.serviciosGoogle()}" type="preRenderView" />  
+        </c:if>
+
+
+
+
+        <ui:include src="topbar.xhtml" />        
+
+        <div id="wrapper">
+            <div id="wrapperIndent">
+
+                <ui:include src="layoutmenu.xhtml" />
+
+
+                <div id="layout-portlets-cover">
+                    <div class="Container96 Fnone MarAuto">
+
+                        <div class="EmptyBox20"></div>
+
+                        <!-- SUB TOPBAR END -->
+
+                        <ui:insert name="content">
+                            aqui va el contenido de las paginas
+                        </ui:insert>
+
+                        <!-- footer -->
+                        <ui:include src="footer.xhtml" />
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <p:ajaxStatus onstart="PF('statusDialog').show()" 
+                      onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" 
+                  modal="true" 
+                  draggable="false" 
+                  closable="false" 
+                  resizable="false" 
+                  showHeader="false">
+            <div style="padding: 10px 40px">
+                <h:outputText value="Cargando " />
+                <p:graphicImage name="images/preloader.gif" 
+                                library="modena-layout"
+                                style="vertical-align: middle"/>
+            </div>
+        </p:dialog>
+
+        <p:growl id="messages" 
+                 showDetail="false" 
+                 life="6000"
+                 autoUpdate="true"
+                 sticky="false"/>
+
+        <p:confirmDialog global="true" 
+                         showEffect="fade" 
+                         hideEffect="fade">
+            <h:form>
+                <p:commandButton value="Si" 
+                                 type="button" 
+                                 styleClass="ui-confirmdialog-yes GreenButton" 
+                                 icon="icon-check"/>
+
+                <p:commandButton value="Cancelar" 
+                                 type="button" 
+                                 styleClass="ui-confirmdialog-no RedButton" 
+                                 icon="icon-cross"/>
+            </h:form>            
+        </p:confirmDialog>
+
+        <h:outputStylesheet name="css/core-layout.css" library="modena-layout" />
+        <h:outputStylesheet name="css/animate.css" library="modena-layout" />
+        <h:outputStylesheet name="css/modena-font.css" library="modena-layout" />
+        <h:outputStylesheet name="css/ripple-effect.css" library="modena-layout" />
+        <h:outputStylesheet name="css/perfect-scrollbar.css" library="modena-layout" />
+        <h:outputStylesheet name="css/font-awesome.css" library="modena-layout" />
+        <h:outputStylesheet name="css/modena-layout.css" library="modena-layout" />
+        <h:outputStylesheet name="css/estilo.css" library="gather" />
+
+        <script language="javascript">
+            var popupWindow = null;
+            function centeredPopup(url, winName, w, h, scroll) {
+                LeftPosition = (screen.width) ? (screen.width - w) / 2 : 0;
+                TopPosition = (screen.height) ? (screen.height - h) / 2 : 0;
+                settings =
+                        'height=' + h + ',width=' + w + ',top=' + TopPosition + ',left=' + LeftPosition + ',scrollbars=' + scroll + ',resizable'
+                popupWindow = window.open(url, winName, settings);
+                //setTimeout(popupWindow.close(),5000);
+                
+
+            }
+            
+        </script>
+    </h:body>
+
+</html>

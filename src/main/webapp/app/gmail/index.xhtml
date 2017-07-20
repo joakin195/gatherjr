@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                template="/WEB-INF/layout/default.xhtml">
+
+    <ui:define name="content">
+        <h:form > 
+            <div class="Container100">
+                <div class="ContainerIndent">
+                    <div class="Card ShadowEffect ui-fluid">
+                        <div class="Container50 Responsive50">
+                            <div class="ContainerIndent">
+                                <h2 class="BigTopic">Bienvenido: 
+                                    <c:if test="#{ not empty gatherContext.userName }">
+                                        <h:outputText value="#{gatherContext.userName.toUpperCase()} " /> 
+                                    </c:if>
+                                    <c:if test="#{gatherContext.userName eq null}">
+                                        <h:outputText value="#{authGoogle.suser.toUpperCase()} " /> 
+                                    </c:if>
+                                </h2>
+
+                                <p:panelGrid columns="1" style="margin-bottom:10px" layout="grid" styleClass="ui-panelgrid-blank">
+                                    <c:if test="#{gatherContext.session eq null}">
+                                        <p:outputLabel value="Enviar mail: #{authGoogle.smail}"></p:outputLabel>
+                                    </c:if>
+                                    <c:if test="#{gatherContext.session eq null}">
+                                        <p:outputLabel for="para" value="Destinatario:" />
+                                        <p:inputText type="mail" id="para" placeholder="Para"  value="#{gmailTest.to}" required="true" ></p:inputText>
+                                        <p:outputLabel for="asunto" value="Asunto:" />
+                                        <p:inputText id="asunto" placeholder="asunto" value="#{gmailTest.subject}" required="true" ></p:inputText>
+                                        <p:outputLabel for="texto" value="Texto:" />
+                                        <p:editor id="texto" widgetVar="editorWidget" required="true" value="#{gmailTest.body}" width="520" height="200" />
+                                        
+                                    </c:if>
+                                    <c:if test="#{ not empty gatherContext.userName }">
+                                        <p:commandButton value="Sesion ID: #{gatherContext.session}" actionListener="#{login.logout()}"/>
+                                    </c:if>
+                                    <c:if test="#{gatherContext.session eq null}">
+                                        <p:commandButton value="Enviar Correo" actionListener="#{gmailTest.enviar()}"></p:commandButton>
+                                    </c:if>
+
+                                </p:panelGrid>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+    </ui:define>
+
+
+</ui:composition>
+
+
+

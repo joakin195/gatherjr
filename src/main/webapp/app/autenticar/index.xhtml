@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+
+        <title>Autentificar Google</title>
+        <ui:insert name="head" />
+
+    </h:head>
+
+    <h:body styleClass="GrayModena Geometry" style="height:auto;" >
+        <p:inputText type="hidden" id="mail" value="#{authGoogle.smail}"  />
+        <h:form id="acceso" >
+            <div class="Wid100">
+
+
+
+                <p:commandButton type="hidden" id="btnInicio" value="inicio"   actionListener="#{authGoogle.inicio()}" style="display: none"   />
+
+                                 <p:commandButton type="hidden" id="btnError" value="error" actionListener="#{authGoogle.error()}" style="display: none"/>
+
+
+            </div>
+
+            <p:dialog widgetVar="statusDialog" 
+                      modal="true" 
+                      draggable="false" 
+                      closable="false" 
+                      resizable="false" 
+                      showHeader="false">
+                <div style="padding: 10px 40px">
+                    <h:outputText value="Cargando " />
+                    <p:graphicImage name="images/preloader.gif" 
+                                    library="modena-layout"
+                                    style="vertical-align: middle"/>
+                </div>
+            </p:dialog>
+
+
+        </h:form>
+
+
+    </h:body>
+    <script>
+        /*var mail = document.getElementById("mail").value;
+        validacion = /^[-\w.%+]{1,64}@gmail.com/i;
+        alert(mail);
+        if (!validacion.test(mail)) {
+            document.getElementById('acceso:btnError').click();
+        } else {
+            document.getElementById('acceso:btnInicio').click();
+        }*/
+        
+        document.getElementById('acceso:btnInicio').click();
+
+    </script>
+</html>
